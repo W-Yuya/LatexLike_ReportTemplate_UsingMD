@@ -1,0 +1,322 @@
+/* ===== 基本 ===== */
+
+.latex-like.markdown-preview-view {
+  max-width: 800px;
+  margin: auto;
+  padding: 20mm;
+  line-height: 1.3;
+  font-size: 11px;
+  background: white;
+  color: #111;
+  font-family: "Noto Serif JP", "Hiragino Mincho ProN", serif;
+
+  /* 章・節・各種番号のカウンタ初期化 */
+  counter-reset: sec subsec item eq fig tbl ref;
+}
+.latex-like.markdown-preview-view th{
+  color: #333;
+}
+
+/* ===== 見出し ===== */
+.latex-like h1,
+.latex-like h2,
+.latex-like h3,
+.latex-like h4 {
+  font-weight: 600;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  font-family: "Gothic";
+}
+
+/* h1 */
+.latex-like h1 {
+  font-size: 1.8em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+/* ===== 署名 ===== */
+.latex-like .signature {
+  width: 100%;
+  text-align: right;
+  margin: -0.4em 0 1em;
+  line-height: 1.5;
+  font-size: 0.95em;
+  font-style: normal;
+}
+
+.latex-like .signature p {
+  margin: 0em;
+  text-indent: 0;
+}
+
+.latex-like h1 + .signature {
+  margin-top: -0.6em;
+}
+
+/* h2 */
+.latex-like h2 {
+  font-size: 1.4em;
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
+  line-height: 1.2em;
+  counter-increment: sec;
+  counter-set: subsec 0 item 0;
+}
+.latex-like h2::before {
+  white-space: pre-wrap; /* 連続するスペースを保持 */
+  content: counter(sec) ".   ";
+}
+
+/* h3 */
+.latex-like h3 {
+  font-size: 1.2em;
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
+  line-height: 1.2em;
+  counter-increment: subsec;
+  counter-set: item 0;
+}
+.latex-like h3::before {
+  white-space: pre-wrap; /* 連続するスペースを保持 */
+  content: counter(sec) "." counter(subsec) "   ";
+}
+
+/* h4 (項) */
+.latex-like h4 {
+  font-size: 1.08em;
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
+  line-height: 1.2em;
+  counter-increment: item;
+}
+.latex-like h4::before {
+  white-space: pre-wrap; /* 連続するスペースを保持 */
+  content: counter(sec) "." counter(subsec) "." counter(item) "   ";
+}
+
+/* ===== 段落 ===== */
+.latex-like p {
+  text-indent: 1em;
+  line-height: 1.3em;
+  margin: 0em;
+}
+
+.latex-like li p,
+.latex-like blockquote p {
+  text-indent: 0;
+}
+
+/* ===== 図・表・署名の共通見た目 ===== */
+.latex-like .signature,
+.latex-like p > em:only-child,
+.latex-like p > strong:only-child {
+  color: #333;
+  font-size: 0.95em;
+}
+
+.latex-like .signature,
+.latex-like p > em:only-child,
+.latex-like p > strong:only-child,
+.latex-like .caption {
+  font-style: normal;
+}
+
+/* ===== 数式 ===== */
+.latex-like .MathJax {
+  font-size: 1.05em;
+}
+
+/* 数式ブロック（Obsidian標準 + 任意ラッパー） */
+.latex-like .math.math-block,
+.latex-like .equation {
+  position: relative;
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+.latex-like .math.math-block::after,
+.latex-like .equation::after {
+  counter-increment: eq;
+  content: "(" counter(eq) ")";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ===== コード ===== */
+.latex-like code {
+  font-family: "Consolas", monospace;
+  background: #f5f5f5;
+  color: #333;
+  padding: 2px 4px;
+}
+
+/* ===== コードブロック ===== */
+.latex-like .language-md{
+  background: #f5f5f5;
+}
+
+/* ===== 引用 ===== */
+.latex-like blockquote {
+  border-left: 3px solid #ccc;
+  padding-left: 1em;
+  color: #555;
+}
+
+/* ===== 図 ===== */
+.latex-like .figure {
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+.latex-like .figure img {
+  display: block;
+  margin: auto;
+  max-width: 90%;
+}
+
+.latex-like img {
+  display: block;
+  margin: 1em auto;
+  max-width: 90%;
+}
+
+/* 斜体のみの単独段落を図キャプションとして扱う */
+.latex-like p > em:only-child {
+  display: block;
+  text-indent: 0;
+  text-align: center;
+  margin-top: 0em !important;
+  margin-bottom: 1.2em;
+}
+
+.latex-like p > em:only-child::before {
+  counter-increment: fig;
+  content: "図" counter(fig) " ";
+  font-weight: 600;
+}
+
+/* ===== 表 ===== */
+.latex-like .table-wrap {
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+.latex-like table {
+  border-collapse: collapse;
+  margin: 0.2em auto 1.2em;
+  border-top: 2px solid #222;
+  border-bottom: 2px solid #222;
+}
+
+.latex-like th,
+.latex-like td {
+  padding: 6px 10px;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 11px;
+}
+
+.latex-like th {
+  background: transparent;
+  border-bottom: 1px solid #444;
+}
+
+/* 表キャプション */
+
+/* 太字のみの単独段落を表キャプションとして扱う（表の上に置く） */
+.latex-like p > strong:only-child {
+  display: block;
+  text-indent: 0;
+  text-align: center;
+  margin-top: 1.2em;
+  margin-bottom: 0.2em;
+}
+
+.latex-like p > strong:only-child::before {
+  counter-increment: tbl;
+  content: "表" counter(tbl) " ";
+  font-weight: 600;
+}
+
+/* ===== 注釈（footnotes） ===== */
+.latex-like .footnotes {
+  margin-top: 2em;
+  font-size: 0.95em;
+  counter-reset: subsec item;
+}
+
+.latex-like .footnotes::before {
+  display: block;
+  font-size: 1.4em;
+  font-weight: 600;
+  line-height: 1.2em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  font-family: 'Gothic';
+  content: "参考文献";
+}
+
+.latex-like .footnotes hr {
+  display: none;
+}
+
+.latex-like .footnotes ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: note;
+}
+
+.latex-like .footnotes ol li {
+  list-style: none;
+  margin-left: 2em;
+  text-indent: -2em;
+  margin-bottom: 0.35em;
+}
+
+.latex-like .footnotes ol li::before {
+  counter-increment: note;
+  content: "[" counter(note) "] ";
+}
+
+.latex-like .footnotes ol li > p:first-child {
+  margin-top: 0;
+  display: inline;
+}
+
+.latex-like .footnotes ol li > p:last-child {
+  margin-bottom: 0;
+  display: inline;
+}
+
+.latex-like .footnote-ref,
+.latex-like a.footnote-link {
+  text-decoration: none;
+  font-size: 1em;
+  vertical-align: baseline; /*通常の文字とベースラインを合わせる*/
+}
+
+/* ===== ページ番号 ===== */
+.latex-like .pageNumber span{
+  font-size:smaller;
+  font-family: Arial;
+}
+
+/* ===== 印刷 ===== */
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm;
+  }
+
+  .latex-like.markdown-preview-view {
+    padding: 0;
+  }
+}
