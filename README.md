@@ -1,4 +1,4 @@
-# latex-like.css メモ（README短縮版）
+# latex-like.css
 
 ## 目的
 
